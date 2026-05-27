@@ -1,0 +1,79 @@
+#define BLYNK_TEMPLATE_ID "TMPL3IvUnOazP"
+#define BLYNK_TEMPLATE_NAME "test"
+#define BLYNK_AUTH_TOKEN "ner9HeeZoJ0mTxzI_VIleBq1vG_SHURh"
+
+#define BLYNK_PRINT Serial
+
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
+
+// LED pins
+const int redLED = 4;
+const int greenLED = 2;
+
+// WiFi credentials
+char ssid[] = "Your_wifi_name";
+char pass[] = "your_password";
+
+// Blynk authentication
+char auth[] = "YOUR_AUTH_TOKEN";
+
+// Function for RED LED control
+BLYNK_WRITE(V0)
+{
+  int redState = param.asInt();
+
+  if (redState == 1)
+  {
+    digitalWrite(redLED, HIGH);   // Turn ON red LED
+    Serial.println("Red LED ON");
+  }
+  else
+  {
+    digitalWrite(redLED, LOW);    // Turn OFF red LED
+    Serial.println("Red LED OFF");
+  }
+}
+
+// Function for GREEN LED control
+BLYNK_WRITE(V1)
+{
+  int greenState = param.asInt();
+
+  if (greenState == 1)
+  {
+    digitalWrite(greenLED, HIGH);   // Turn ON green LED
+    Serial.println("Green LED ON");
+  }
+  else
+  {
+    digitalWrite(greenLED, LOW);    // Turn OFF green LED
+    Serial.println("Green LED OFF");
+  }
+}
+
+void setup()
+{
+  // Start serial monitor
+  Serial.begin(115200);
+
+  // Configure LED pins as output
+  pinMode(redLED, OUTPUT);
+  pinMode(greenLED, OUTPUT);
+
+  // Initially turn OFF LEDs
+  digitalWrite(redLED, LOW);
+  digitalWrite(greenLED, LOW);
+
+  // Connect to WiFi and Blynk
+  Blynk.begin(auth, ssid, pass);
+
+  Serial.println("ESP32 Connected to Blynk");
+}
+
+void loop()
+{
+  // Run Blynk
+  Blynk.run();
+}
