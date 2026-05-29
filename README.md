@@ -29,6 +29,14 @@ The project was developed to understand the fundamentals of smart home automatio
 - Blynk IoT Platform
 - Embedded C Programming
 
+## Pin Connections
+
+| Component | ESP32 Pin |
+|---|---|
+| Red LED | GPIO 4 |
+| Green LED | GPIO 2 |
+| GND | GND |
+
 ## Project Images
 
 ### Hardware Setup
